@@ -34,7 +34,7 @@ jobs:
             libcups2 \
             libpangocairo-1.0-0 \
             libxshmfence1 \
-            libasound2
+            libasound2t64
 
       - name: Install dependencies
         run: |
