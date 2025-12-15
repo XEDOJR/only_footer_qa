@@ -19,3 +19,6 @@
    playwright install
 3. Запустить тест:
    pytest test_footer.py
+## CI
+В репозитории настроен GitHub Actions workflow.
+Автотест автоматически запускается при каждом push и pull request в ветку `main`.
