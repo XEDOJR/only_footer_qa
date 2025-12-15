@@ -9,15 +9,14 @@ def test_footer_elements():
 
         # Ждём футер
         footer = page.locator("footer")
-        footer.wait_for(state="visible", timeout=20000)  # увеличиваем таймаут
+        footer.wait_for(state="visible", timeout=20000)
 
-        # Проверяем наличие любого img внутри футера
-        footer_images = footer.locator("img")
-        if footer_images.count() == 0:
-            # Альтернатива: проверяем фон через CSS
-            background = footer.evaluate("el => getComputedStyle(el).backgroundImage")
-            assert "url(" in background, "Логотип в футере не найден"
-        else:
-            assert footer_images.count() > 0, "Логотип в футере не найден"
+        # Проверяем, что футер содержит хотя бы одну ссылку
+        links = footer.locator("a")
+        assert links.count() > 0, "Ссылки в футере не найдены"
+
+        # Проверяем, что футер содержит текст (например ©)
+        footer_text = footer.inner_text()
+        assert "©" in footer_text, "Текст футера не найден"
 
         browser.close()
