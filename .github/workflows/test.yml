@@ -11,17 +11,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
- 
+      # 1. Клонируем репозиторий
       - name: Checkout repository
         uses: actions/checkout@v4
 
- 
+      # 2. Устанавливаем Python 3.11
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
-    
+      # 3. Системные зависимости для Playwright
       - name: Install system dependencies
         run: |
           sudo apt-get update
@@ -40,14 +40,15 @@ jobs:
             libasound2t64 \
             libffi8
 
-     
-      - name: Install dependencies
+      # 4. Устанавливаем зависимости Python и Playwright
+      - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+          # Устанавливаем браузеры Playwright
           playwright install --with-deps
 
-     
+      # 5. Запускаем тесты
       - name: Run tests
         run: |
           pytest test_footer.py
